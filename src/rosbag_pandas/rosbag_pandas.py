@@ -43,7 +43,7 @@ def bag_to_dataframe(bag_name, include=None, exclude=None, parse_header=False, s
     # create datastore
     datastore = {}
     for topic in dmap.keys():
-        for f, key in dmap[topic].iteritems():
+        for f, key in dmap[topic].items():
             t = msg_type[topic][f]
             if isinstance(t, int) or isinstance(t, float):
                 arr = np.empty(length)
@@ -76,7 +76,7 @@ def bag_to_dataframe(bag_name, include=None, exclude=None, parse_header=False, s
             else:
                 index[idx] = mt.to_nsec()
         fields = dmap[topic]
-        for f, key in fields.iteritems():
+        for f, key in fields.items():
             try:
                 d = get_message_data(msg, f)
                 if isinstance(d, tuple):
@@ -275,7 +275,7 @@ def get_key_name(name):
 
 def clean_for_export(df):
     new_df = pd.DataFrame()
-    for c, t in df.dtypes.iteritems():
+    for c, t in df.dtypes.items():
         if t.kind in 'OSUV':
             s = df[c].dropna().apply(func=str)
             s = s.str.replace('\n', '')
